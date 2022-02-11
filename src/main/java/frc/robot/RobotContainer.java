@@ -40,7 +40,7 @@ public class RobotContainer {
     configureButtonBindings();
     drivetrain.setDefaultCommand(new ArcadeDrive());
     intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake));
-    arm.setDefaultCommand(new ArmHandler(arm, new JoystickButton(joystick, 5), new JoystickButton(joystick, 6)));
+    arm.setDefaultCommand(new ArmHandler(arm, new JoystickButton(joystick, 9), new JoystickButton(joystick, 10)));
   }
 
   /**

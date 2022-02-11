@@ -16,20 +16,22 @@ import frc.robot.Constants;
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   CANSparkMax armMotor = new CANSparkMax(21, MotorType.kBrushless);
-  public RelativeEncoder armEncoder = armMotor.getEncoder();
-  SparkMaxPIDController pid = armMotor.getPIDController();
+  //public RelativeEncoder armEncoder = armMotor.getEncoder();
+  //SparkMaxPIDController pid = armMotor.getPIDController();
     
   public Arm() {
     
-    pid.setP(Constants.P);
-    pid.setOutputRange(-0.2, 0.2);
+    //pid.setP(Constants.P);
+    //pid.setOutputRange(-0.2, 0.2);
     armMotor.setIdleMode(IdleMode.kBrake);
 
   }
 
-
+  public void setSpeed(double speed){
+    armMotor.set(speed);
+  }
   public void setPosition(double position) {
-    pid.setReference(position, CANSparkMax.ControlType.kPosition);
+    //pid.setReference(position, CANSparkMax.ControlType.kPosition);
   }
 
   public void setBrake(IdleMode brakeState) {

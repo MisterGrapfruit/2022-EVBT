@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+/*
 package frc.robot.commands;
 
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -21,7 +21,7 @@ public class ArmPIDHandler extends CommandBase {
   double upPos = Constants.armUpPosition;
   boolean armIsUp;
 
-  /** Creates a new ArmHandler. */
+  /** Creates a new ArmHandler. 
   public ArmPIDHandler(Arm sub, JoystickButton downButton, JoystickButton upButton) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.downButton = downButton;
@@ -67,3 +67,4 @@ public class ArmPIDHandler extends CommandBase {
     return false;
   }
 }
+*/
