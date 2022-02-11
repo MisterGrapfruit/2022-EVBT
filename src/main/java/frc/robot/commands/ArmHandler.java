@@ -18,8 +18,8 @@ public class ArmHandler extends CommandBase {
   final double armHoldDown = 0.13;
   final double armTravel = 0.5;
 
-  final double armTimeUp = 0.5;
-  final double armTimeDown = 0.35;
+  final double armTimeUp = 0.3;//0.5;
+  final double armTimeDown = 0.2;//0.35;
 
   boolean armIsUp;
   double lastBurstTime = 0;
