@@ -13,8 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static double P = 1;
-    public static double armUpPosition = 0.01;//0.25;
-    public static double armDownPosition = 0.03;//0.05;
+    //public static double P = 1;
+    //public static double armUpPosition = 0.01;//0.25;
+    //public static double armDownPosition = 0.03;//0.05;
+    public static double climbSpeed = 0.5;
 }
 //random comment testing github stuff
