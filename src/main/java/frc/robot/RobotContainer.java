@@ -34,11 +34,13 @@ public class RobotContainer {
   public final JoystickButton button1 = new JoystickButton(joystick, 1);
   public final JoystickButton button2 = new JoystickButton(joystick, 2);
 
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    drivetrain.setDefaultCommand(new ArcadeDrive());
+    
+    drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain,joystick));
     intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake));
     arm.setDefaultCommand(new ArmHandler(arm, new JoystickButton(joystick, 9), new JoystickButton(joystick, 10)));
   }
