@@ -6,14 +6,23 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
+import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
-  
-  public ArcadeDrive() {
-    addRequirements(RobotContainer.drivetrain);
+  Drivetrain m_drive;
+  Joystick stick;
+  JoystickButton climbButton = new JoystickButton(stick, 7);
+  double throttle, twist;
+  double speed;
+  public ArcadeDrive(Drivetrain sub, Joystick stick) {
+    m_drive = sub;
+    this.stick = stick;
+    addRequirements(m_drive);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +32,28 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.drivetrain.arcadeDrive(-RobotContainer.joystick.getRawAxis(1), RobotContainer.joystick.getRawAxis(2));
+    if (climbButton.get()) {
+      speed = Constants.climbSpeed;
+    } else {
+      speed = -stick.getRawAxis(3);
+    }
+
+    throttle = stick.getRawAxis(1);
+    twist = stick.getRawAxis(2);
+
+    if(Math.abs(throttle) < 0.1){
+      throttle = 0;
+    }
+    if(Math.abs(twist) < 0.1){
+      twist = 0;
+    }
+
+    throttle *= Math.abs(throttle) * speed;
+    twist*=twist*=twist * speed;
+    m_drive.setSpeed(throttle + twist, throttle - twist);
+    System.out.print("Throttle = " + throttle);
+    System.out.println("  |  Twist = " + twist);
+    m_drive.printVals();
   }
 
   // Called once the command ends or is interrupted.
@@ -36,3 +66,24 @@ public class ArcadeDrive extends CommandBase {
     return false;
   }
 }
+
+
+
+    /*
+    Arcade Input Scaling - WIP
+
+    double sInput;
+    double lesserInput = Math.min(Math.abs(throttle), Math.abs(twist));
+    double greaterInput = Math.max(Math.abs(throttle), Math.abs(twist));
+    if(greaterInput > 0){
+      sInput = lesserInput/greaterInput + 1;
+    }
+    else{
+      sInput = 1;
+    }
+    throttle /= sInput;
+    twist /= sInput;
+    */
+    //throttle *= Math.abs(throttle) * 0.8;
+    //twist *= Math.abs(twist) * 0.6;
+    
