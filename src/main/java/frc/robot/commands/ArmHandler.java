@@ -16,9 +16,9 @@ public class ArmHandler extends CommandBase {
   private JoystickButton upButton;
   final double armHoldUp = 0.08;
   final double armHoldDown = 0.13;
-  final double armTravel = 0.5;
+  final double armTravel = 0.6;
 
-  final double armTimeUp = 0.3;//0.5;
+  final double armTimeUp = 0.2;//0.5;
   final double armTimeDown = 0.2;//0.35;
 
   boolean armIsUp = false;
