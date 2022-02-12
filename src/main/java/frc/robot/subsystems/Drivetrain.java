@@ -30,13 +30,11 @@ public class Drivetrain extends SubsystemBase {
     rightFront.set(rightSpeed);
   }
 
-  public void arcadeDrive(double throttle, double twist){
-    if(Math.abs(throttle) < 0.1){
-      throttle = 0;
-    }
-    if(Math.abs(twist) < 0.1){
-      twist = 0;
-    }
+  public void printVals(){
+    System.out.print(leftFront.get());
+    System.out.print(" | " + leftBack.get());
+    System.out.print(" | " + rightFront.get());
+    System.out.println(" | " + rightBack.get());
     /*
     Arcade Input Scaling - WIP
 
@@ -54,15 +52,7 @@ public class Drivetrain extends SubsystemBase {
     */
     //throttle *= Math.abs(throttle) * 0.8;
     //twist *= Math.abs(twist) * 0.6;
-    throttle*=throttle*=throttle;
-    twist*=twist*=twist;
-    setSpeed(throttle + twist, throttle - twist);
-    System.out.print("Throttle = " + throttle);
-    System.out.println("  |  Twist = " + twist);
-    System.out.print(leftFront.get());
-    System.out.print(" | " + leftBack.get());
-    System.out.print(" | " + rightFront.get());
-    System.out.println(" | " + rightBack.get());
+    
   }
 
   @Override
