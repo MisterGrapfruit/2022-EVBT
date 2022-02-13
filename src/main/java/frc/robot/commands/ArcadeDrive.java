@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDrive extends CommandBase {
@@ -18,10 +19,10 @@ public class ArcadeDrive extends CommandBase {
   Joystick stick;
   JoystickButton climbButton = new JoystickButton(stick, 7);
   double throttle, twist;
-  double speed;
-  public ArcadeDrive(Drivetrain sub, Joystick stick) {
-    m_drive = sub;
-    this.stick = stick;
+  //double speed;
+  public ArcadeDrive() {
+    m_drive = RobotContainer.drivetrain;
+    this.stick = RobotContainer.joystick;
     addRequirements(m_drive);
   }
 
@@ -32,11 +33,11 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (climbButton.get()) {
+    /*if (climbButton.get()) {
       speed = Constants.climbSpeed;
     } else {
       speed = -stick.getRawAxis(3);
-    }
+    }*/
 
     throttle = stick.getRawAxis(1);
     twist = stick.getRawAxis(2);
@@ -48,12 +49,9 @@ public class ArcadeDrive extends CommandBase {
       twist = 0;
     }
 
-    throttle *= Math.abs(throttle) * speed;
-    twist*=twist*=twist * speed;
+    throttle *= Math.abs(throttle);// * speed;
+    twist*=twist*=twist;// * speed;
     m_drive.setSpeed(throttle + twist, throttle - twist);
-    System.out.print("Throttle = " + throttle);
-    System.out.println("  |  Twist = " + twist);
-    m_drive.printVals();
   }
 
   // Called once the command ends or is interrupted.
@@ -69,7 +67,8 @@ public class ArcadeDrive extends CommandBase {
 
 
 
-    /*
+
+  /*
     Arcade Input Scaling - WIP
 
     double sInput;

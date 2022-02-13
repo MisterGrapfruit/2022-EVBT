@@ -11,9 +11,9 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArmHandler;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
-//import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -25,10 +25,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final Drivetrain drivetrain = new Drivetrain();
-  //public static final Intake intake = new Intake();
+  public static final Intake intake = new Intake();
   public static final Arm arm = new Arm();
-
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   public static final Joystick joystick = new Joystick(0);
   public final JoystickButton button1 = new JoystickButton(joystick, 1);
@@ -40,8 +38,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     
-    drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain,joystick));
-    //intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake));
+    drivetrain.setDefaultCommand(new ArcadeDrive());
+    intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake));
     arm.setDefaultCommand(new ArmHandler(arm, new JoystickButton(joystick, 9), new JoystickButton(joystick, 10)));
   }
 
@@ -53,8 +51,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    //button2.whileHeld(new RunCommand(intake::IntakeIn, intake));
-    //button1.whileHeld(new RunCommand(intake::IntakeOut, intake));
+    button2.whileHeld(new RunCommand(intake::IntakeIn, intake));
+    button1.whileHeld(new RunCommand(intake::IntakeOut, intake));
   }
 
   /**

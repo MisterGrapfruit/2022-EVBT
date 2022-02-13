@@ -21,7 +21,7 @@ public class ArmHandler extends CommandBase {
   final double armTimeUp = 0.5;//0.5;//time it takes the arm to lift
   final double armTimeDown = 0.2;//0.35;//time it takes the arm to lower
 
-  boolean armIsUp = false;
+  boolean armIsUp;
   double lastBurstTime = 0;
 
 
