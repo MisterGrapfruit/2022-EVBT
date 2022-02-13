@@ -14,12 +14,12 @@ public class ArmHandler extends CommandBase {
   private Arm m_arm;
   private JoystickButton downButton;
   private JoystickButton upButton;
-  final double armHoldUp = 0.01;//arm up holding torque
-  final double armHoldDown = 0;//.13;//torque the arm pushed down with in lowered position(stop it from jumping when it intakes)
-  final double armTravel = 0.6;//arm travel torque
+  final double armHoldUp = 0.06;//arm up holding torque
+  final double armHoldDown = 0.08;//.13;//torque the arm pushed down with in lowered position(stop it from jumping when it intakes)
+  final double armTravel = 0.3;//arm travel torque
 
-  final double armTimeUp = 0.5;//0.5;//time it takes the arm to lift
-  final double armTimeDown = 0.2;//0.35;//time it takes the arm to lower
+  final double armTimeUp = 0.65;//0.5;//time it takes the arm to lift
+  final double armTimeDown = 0.08;//0.35;//time it takes the arm to lower
 
   boolean armIsUp;
   double lastBurstTime = 0;
