@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 
-public class ArcadeDrive extends CommandBase {
+public class CHEEZYDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
   Drivetrain m_drive;
   Joystick stick;
   JoystickButton climbButton = new JoystickButton(stick, 7);
   double throttle, twist;
   //double speed;
-  public ArcadeDrive() {
+  public CHEEZYDrive() {
     m_drive = RobotContainer.drivetrain;
     this.stick = RobotContainer.joystick;
     addRequirements(m_drive);
@@ -51,7 +51,7 @@ public class ArcadeDrive extends CommandBase {
 
     throttle *= Math.abs(throttle);// * speed;
     twist*=twist*=twist;// * speed;
-    m_drive.setSpeed(throttle + twist, throttle - twist);
+    m_drive.setSpeed(throttle + (twist*Math.abs(throttle)) , throttle - (twist*Math.abs(throttle)) );
   }
 
   // Called once the command ends or is interrupted.
