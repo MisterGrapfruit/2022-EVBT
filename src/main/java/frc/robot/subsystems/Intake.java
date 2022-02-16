@@ -12,21 +12,26 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
-  VictorSPX intakeRoller = new VictorSPX(20);
+  VictorSPX intakeRoller = new VictorSPX(20); //creates intake motor
+
+  private static final Intake intake = new Intake();
+  public static Intake getInstance(){
+    return intake;
+  }
 
   /** Creates a new Intake. */
   public Intake() {}
 
   public void IntakeIn(){
-    intakeRoller.set(ControlMode.PercentOutput, -0.5);
+    intakeRoller.set(ControlMode.PercentOutput, -0.5); //sets intake in speed
   }
 
   public void IntakeOut(){
-    intakeRoller.set(ControlMode.PercentOutput, 1.0);
+    intakeRoller.set(ControlMode.PercentOutput, 1.0); //sets intake out speed
   }
 
   public void IntakeStop(){
-    intakeRoller.set(ControlMode.PercentOutput, 0);
+    intakeRoller.set(ControlMode.PercentOutput, 0); //sets speed to 0
   }
 
   @Override

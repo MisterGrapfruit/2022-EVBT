@@ -24,9 +24,6 @@ public class ArmHandler extends CommandBase {
   boolean armIsUp;
   double lastBurstTime = 0;
 
-
-
-
   public ArmHandler(Arm sub, JoystickButton downButton, JoystickButton upButton) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.downButton = downButton;
@@ -44,14 +41,15 @@ public class ArmHandler extends CommandBase {
   public void execute() {
 
     if (armIsUp) {
-      if(Timer.getFPGATimestamp() - lastBurstTime < armTimeUp){
+      if (Timer.getFPGATimestamp() - lastBurstTime < armTimeUp) {
         m_arm.setSpeed(armTravel);
       }
       else{
         m_arm.setSpeed(armHoldUp);
       }
-    } else {
-      if(Timer.getFPGATimestamp() - lastBurstTime < armTimeUp){
+    } 
+    else if (!armIsUp) {
+      if (Timer.getFPGATimestamp() - lastBurstTime < armTimeDown) {
         m_arm.setSpeed(-armTravel);
       }
       else{
@@ -59,10 +57,11 @@ public class ArmHandler extends CommandBase {
       }
     }
 
-    if (downButton.get() && (armIsUp == false)) {
+    if (upButton.get() && (armIsUp == false)) {
       lastBurstTime = Timer.getFPGATimestamp();
       armIsUp = true;
-    } else if(upButton.get() && armIsUp == true) {
+    } 
+    else if (downButton.get() && armIsUp == true) {
       lastBurstTime = Timer.getFPGATimestamp();
       armIsUp = false;
     }
@@ -71,7 +70,7 @@ public class ArmHandler extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_arm.armStop();
+    //m_arm.armStop();
   }
 
   // Returns true when the command should end.

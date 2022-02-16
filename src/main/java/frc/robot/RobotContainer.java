@@ -6,9 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArmHandler;
+import frc.robot.commands.Climb;
+import frc.robot.commands.TestAuton;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -24,23 +25,24 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public static final Drivetrain drivetrain = new Drivetrain();
-  public static final Intake intake = new Intake();
-  public static final Arm arm = new Arm();
+  public static final Drivetrain drivetrain = Drivetrain.getInstance(); //creates drivetrain
+  public static final Intake intake = Intake.getInstance(); //creates intake
+  public static final Arm arm = Arm.getInstance(); //creates arm
 
-  public static final Joystick joystick = new Joystick(0);
-  public final JoystickButton button1 = new JoystickButton(joystick, 1);
+  public static final Joystick joystick = new Joystick(0); //creates joystick
+  public final JoystickButton button1 = new JoystickButton(joystick, 1); //creates joystick buttons
   public final JoystickButton button2 = new JoystickButton(joystick, 2);
-
+  public final JoystickButton button9 = new JoystickButton(joystick, 9);
+  public final JoystickButton button10 = new JoystickButton(joystick, 10);
+  public final JoystickButton button11 = new JoystickButton(joystick, 11);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
-    drivetrain.setDefaultCommand(new ArcadeDrive());
-    intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake));
-    arm.setDefaultCommand(new ArmHandler(arm, new JoystickButton(joystick, 9), new JoystickButton(joystick, 10)));
+    drivetrain.setDefaultCommand(new ArcadeDrive()); //sets default command of drivetrain to arcadedrive
+    intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake)); //sets default command of intake to IntakeStop *continuous
+    arm.setDefaultCommand(new ArmHandler(arm, button9, button10)); //sets default command of arm to arm handler
   }
 
   /**
@@ -50,9 +52,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
     button2.whileHeld(new RunCommand(intake::IntakeIn, intake));
     button1.whileHeld(new RunCommand(intake::IntakeOut, intake));
+    button11.whileHeld(new Climb());
+    //dfghjk
   }
 
   /**
@@ -62,6 +65,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;//m_autoCommand;
+    return new TestAuton();//m_autoCommand;
   }
 }

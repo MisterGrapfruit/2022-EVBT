@@ -16,6 +16,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   CANSparkMax armMotor = new CANSparkMax(21, MotorType.kBrushless);
+
+  private static final Arm arm = new Arm();
+  public static Arm getInstance(){
+    return arm;
+  }
   //public RelativeEncoder armEncoder = armMotor.getEncoder();
   //SparkMaxPIDController pid = armMotor.getPIDController();
     
@@ -30,7 +35,7 @@ public class Arm extends SubsystemBase {
   public void setSpeed(double speed){
     armMotor.set(speed);
   }
-  public void setPosition(double position) {
+/*  public void setPosition(double position) {
     //pid.setReference(position, CANSparkMax.ControlType.kPosition);
   }
 
@@ -43,7 +48,7 @@ public class Arm extends SubsystemBase {
     armMotor.stopMotor();
 
   }
-
+*/
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
