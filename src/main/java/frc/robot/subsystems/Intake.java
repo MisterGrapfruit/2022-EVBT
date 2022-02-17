@@ -22,16 +22,20 @@ public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   public Intake() {}
 
+  public double getSpeed(){
+    return intakeRoller.getMotorOutputPercent();
+  }
+
   public void IntakeIn(){
-    intakeRoller.set(ControlMode.PercentOutput, -0.5); //sets intake in speed
+    intakeRoller.set(ControlMode.PercentOutput, -0.75); //sets intake in speed
   }
 
   public void IntakeOut(){
-    intakeRoller.set(ControlMode.PercentOutput, 1.0); //sets intake out speed
+    intakeRoller.set(ControlMode.PercentOutput, 1.0); //sets intake in speed
   }
 
   public void IntakeStop(){
-    intakeRoller.set(ControlMode.PercentOutput, 0); //sets speed to 0
+      intakeRoller.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

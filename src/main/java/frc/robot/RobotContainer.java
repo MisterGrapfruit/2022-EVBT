@@ -7,13 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ArmHandler;
 import frc.robot.commands.Climb;
 import frc.robot.commands.TestAuton;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -32,6 +32,7 @@ public class RobotContainer {
   public static final Joystick joystick = new Joystick(0); //creates joystick
   public final JoystickButton button1 = new JoystickButton(joystick, 1); //creates joystick buttons
   public final JoystickButton button2 = new JoystickButton(joystick, 2);
+  public final JoystickButton button3 = new JoystickButton(joystick, 3);
   public final JoystickButton button9 = new JoystickButton(joystick, 9);
   public final JoystickButton button10 = new JoystickButton(joystick, 10);
   public final JoystickButton button11 = new JoystickButton(joystick, 11);
@@ -41,8 +42,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(new ArcadeDrive()); //sets default command of drivetrain to arcadedrive
-    intake.setDefaultCommand(new RunCommand(intake::IntakeStop, intake)); //sets default command of intake to IntakeStop *continuous
-    arm.setDefaultCommand(new ArmHandler(arm, button9, button10)); //sets default command of arm to arm handler
+    arm.setDefaultCommand(new RunCommand(arm::ArmHold, arm));
   }
 
   /**
@@ -52,8 +52,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    button2.whileHeld(new RunCommand(intake::IntakeIn, intake));
-    button1.whileHeld(new RunCommand(intake::IntakeOut, intake));
+    button2.whenPressed(new InstantCommand(intake::IntakeIn, intake));
+    button1.whenPressed(new InstantCommand(intake::IntakeOut, intake));
+    button3.whenPressed(new InstantCommand(intake::IntakeStop, intake));
+    button9.whenPressed(new InstantCommand(arm::ArmUp, arm));
+    button10.whenPressed(new InstantCommand(arm::ArmDown, arm));
     button11.whileHeld(new Climb());
     //dfghjk
   }

@@ -7,6 +7,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +18,9 @@ public class Drivetrain extends SubsystemBase {
   CANSparkMax rightFront = new CANSparkMax(11, MotorType.kBrushless);
   CANSparkMax leftBack = new CANSparkMax(12, MotorType.kBrushless);
   CANSparkMax rightBack = new CANSparkMax(10, MotorType.kBrushless);
+
+  public RelativeEncoder leftEncoder = leftFront.getEncoder();
+  public RelativeEncoder rightEncoder = rightFront.getEncoder();
 
   private static final Drivetrain drivetrain = new Drivetrain();
   public static Drivetrain getInstance(){
@@ -58,15 +62,16 @@ public class Drivetrain extends SubsystemBase {
     throttle /= sInput;
     twist /= sInput;
     */
-    throttle *= Math.abs(throttle) * Math.abs(throttle); //cubes throttle input
-    twist *= Math.abs(twist) * Math.abs(twist) * Math.abs(twist); //4ths twist input
+    throttle *= Math.abs(throttle) * Math.abs(throttle) * 0.8; //cubes throttle input
+    twist *= Math.abs(twist) * Math.abs(twist) * 0.6; //4ths twist input
     setSpeed(throttle + twist, throttle - twist); //sets speed of left and right motor
-    System.out.print("Throttle = " + throttle); //prints throttle twist and speeds of 4 motors to console
+    /*System.out.print("Throttle = " + throttle); //prints throttle twist and speeds of 4 motors to console
     System.out.println("  |  Twist = " + twist);
     System.out.print(leftFront.get());
     System.out.print(" | " + leftBack.get());
     System.out.print(" | " + rightFront.get());
     System.out.println(" | " + rightBack.get());
+    */
   }
 
   @Override

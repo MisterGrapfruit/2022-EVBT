@@ -9,13 +9,18 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.revrobotics.RelativeEncoder;
 //import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import frc.robot.Constants;
+import frc.robot.Constants;
 
 
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   CANSparkMax armMotor = new CANSparkMax(21, MotorType.kBrushless);
+
+  boolean armIsUp = true;
+  double lastBurstTime = -1.0;
 
   private static final Arm arm = new Arm();
   public static Arm getInstance(){
@@ -25,15 +30,44 @@ public class Arm extends SubsystemBase {
   //SparkMaxPIDController pid = armMotor.getPIDController();
     
   public Arm() {
-    
+    ArmUp();
     //pid.setP(Constants.P);
     //pid.setOutputRange(-0.2, 0.2);
     armMotor.setIdleMode(IdleMode.kBrake);
 
   }
 
-  public void setSpeed(double speed){
-    armMotor.set(speed);
+  public void ArmUp(){
+    if (armIsUp == false) {
+      lastBurstTime = Timer.getFPGATimestamp();
+      armIsUp = true;
+    } 
+  }
+
+  public void ArmDown(){
+    if (armIsUp == true) {
+      lastBurstTime = Timer.getFPGATimestamp();
+      armIsUp = false;
+    } 
+  }
+
+  public void ArmHold(){
+    if (armIsUp) {
+      if (Timer.getFPGATimestamp() - lastBurstTime < Constants.armTimeUp) {
+        armMotor.set(Constants.armTravel);
+      }
+      else{
+        armMotor.set(Constants.armHoldUp);
+      }
+    } 
+    else if (!armIsUp) {
+      if (Timer.getFPGATimestamp() - lastBurstTime < Constants.armTimeDown) {
+        armMotor.set(-Constants.armTravel);
+      }
+      else{
+        armMotor.set(-Constants.armHoldDown);
+      }
+    }
   }
 /*  public void setPosition(double position) {
     //pid.setReference(position, CANSparkMax.ControlType.kPosition);

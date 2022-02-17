@@ -20,7 +20,7 @@ public class Climb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.drivetrain.arcadeDrive(0.5, RobotContainer.joystick.getRawAxis(2)*0.05);
+    RobotContainer.drivetrain.arcadeDrive(((RobotContainer.joystick.getRawAxis(3)+1)/2), RobotContainer.joystick.getRawAxis(2)*0.1);
   }
 
   // Called once the command ends or is interrupted.
