@@ -24,7 +24,7 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     //sets speeds to the y and z axis of the joystick
-    RobotContainer.drivetrain.arcadeDrive(-RobotContainer.joystick.getRawAxis(1), RobotContainer.joystick.getRawAxis(2));
+    RobotContainer.drivetrain.funkyDrive(-RobotContainer.joystick.getRawAxis(1), RobotContainer.joystick.getRawAxis(2));
   }
 
   // Called once the command ends or is interrupted.

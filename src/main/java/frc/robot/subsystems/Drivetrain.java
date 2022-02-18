@@ -74,6 +74,37 @@ public class Drivetrain extends SubsystemBase {
     */
   }
 
+
+  public double clamp(double min, double max, double value) {
+    double clampedValue = Math.max(min, Math.min(value, max));
+    return clampedValue;
+
+  }
+
+  public void funkyDrive(double throttle, double twist){
+    //creates deadband - if joystick input on either axis is less than 0.1 just set to 0
+    if(Math.abs(throttle) < 0.1){
+      throttle = 0;
+    }
+    if(Math.abs(twist) < 0.1){
+      twist = 0;
+    }
+
+    double right = throttle * (clamp(-1,1, (1 - 2*(twist))));  
+    double left = throttle * (clamp(-1,1, (1 + 2*(twist))));  
+
+
+    if (throttle < 0) {
+      setSpeed(right, left);
+    } 
+    else {
+      setSpeed(left, right);
+    }
+
+  }
+
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
