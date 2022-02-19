@@ -27,11 +27,25 @@ public class Intake extends SubsystemBase {
   }
 
   public void IntakeIn(){
-    intakeRoller.set(ControlMode.PercentOutput, -0.75); //sets intake in speed
+    if(intakeRoller.getMotorOutputPercent() != 0){
+      intakeRoller.set(ControlMode.PercentOutput, 0);
+    }
+    else {
+    intakeRoller.set(ControlMode.PercentOutput, -0.82);
+    } //sets intake in speed
+  }
+
+  public void AutonIntakeOut(){
+    intakeRoller.set(ControlMode.PercentOutput, 0.95);
   }
 
   public void IntakeOut(){
-    intakeRoller.set(ControlMode.PercentOutput, 1.0); //sets intake in speed
+    if(intakeRoller.getMotorOutputPercent() != 0){
+      intakeRoller.set(ControlMode.PercentOutput, 0);
+    }
+    else {
+    intakeRoller.set(ControlMode.PercentOutput, 0.95);
+    } //sets intake in speed
   }
 
   public void IntakeStop(){

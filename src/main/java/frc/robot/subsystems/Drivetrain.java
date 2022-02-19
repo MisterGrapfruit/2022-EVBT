@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -62,16 +63,14 @@ public class Drivetrain extends SubsystemBase {
     throttle /= sInput;
     twist /= sInput;
     */
-    throttle *= Math.abs(throttle) * Math.abs(throttle) * 0.8; //cubes throttle input
-    twist *= Math.abs(twist) * Math.abs(twist) * 0.6; //4ths twist input
+    throttle *= Math.abs(throttle) * 0.8; //cubes throttle input
+    twist *= Math.abs(twist) * 0.6; //4ths twist input
     setSpeed(throttle + twist, throttle - twist); //sets speed of left and right motor
-    /*System.out.print("Throttle = " + throttle); //prints throttle twist and speeds of 4 motors to console
-    System.out.println("  |  Twist = " + twist);
-    System.out.print(leftFront.get());
-    System.out.print(" | " + leftBack.get());
-    System.out.print(" | " + rightFront.get());
-    System.out.println(" | " + rightBack.get());
-    */
+    
+    SmartDashboard.putNumber("Throttle", throttle);
+    SmartDashboard.putNumber("Twist", twist);
+    SmartDashboard.putNumber("Left Motors", throttle + twist);
+    SmartDashboard.putNumber("Right Motors", throttle - twist);
   }
 
 
@@ -100,7 +99,11 @@ public class Drivetrain extends SubsystemBase {
     else {
       setSpeed(left, right);
     }
-
+    
+    SmartDashboard.putNumber("Throttle", throttle);
+    SmartDashboard.putNumber("Twist", twist);
+    SmartDashboard.putNumber("Left Motors", left);
+    SmartDashboard.putNumber("Right Motors", right);
   }
 
 

@@ -55,8 +55,8 @@ public class RobotContainer {
     button2.whenPressed(new InstantCommand(intake::IntakeIn, intake));
     button1.whenPressed(new InstantCommand(intake::IntakeOut, intake));
     button3.whenPressed(new InstantCommand(intake::IntakeStop, intake));
-    button9.whenPressed(new InstantCommand(arm::ArmUp, arm));
-    button10.whenPressed(new InstantCommand(arm::ArmDown, arm));
+    button10.whenPressed(new InstantCommand(arm::ArmUp, arm));
+    button9.whenPressed(new InstantCommand(arm::ArmDown, arm));
     button11.whileHeld(new Climb());
     //dfghjk
   }

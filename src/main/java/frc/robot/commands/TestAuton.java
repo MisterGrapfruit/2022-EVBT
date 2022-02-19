@@ -25,7 +25,7 @@ public class TestAuton extends CommandBase {
   @Override
   public void execute() {
     if(Timer.getFPGATimestamp() - initTime > 2.5 && Timer.getFPGATimestamp() - initTime < 3.5){
-      RobotContainer.intake.IntakeOut();
+      RobotContainer.intake.AutonIntakeOut();
     }
     if(Timer.getFPGATimestamp() - initTime > 3.5){
       RobotContainer.intake.IntakeStop();

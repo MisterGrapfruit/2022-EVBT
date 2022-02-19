@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import frc.robot.Constants;
 import frc.robot.Constants;
@@ -30,7 +31,6 @@ public class Arm extends SubsystemBase {
   //SparkMaxPIDController pid = armMotor.getPIDController();
     
   public Arm() {
-    ArmUp();
     //pid.setP(Constants.P);
     //pid.setOutputRange(-0.2, 0.2);
     armMotor.setIdleMode(IdleMode.kBrake);
@@ -68,6 +68,7 @@ public class Arm extends SubsystemBase {
         armMotor.set(-Constants.armHoldDown);
       }
     }
+    SmartDashboard.putBoolean("Arm is Up?", armIsUp);
   }
 /*  public void setPosition(double position) {
     //pid.setReference(position, CANSparkMax.ControlType.kPosition);
