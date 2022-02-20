@@ -20,9 +20,10 @@ public final class Constants {
 
     public static final double armHoldUp = 0.06;//arm up holding torque
     public static final double armHoldDown = 0.08;//.13;//torque the arm pushed down with in lowered position(stop it from jumping when it intakes)
-    public static final double armTravel = 0.3;//arm travel torque
+    public static final double armTravelUp = 0.4;//arm travel torque
+    public static final double armTravelDown = -0.5;
   
-    public static final double armTimeUp = 0.65;//0.5;//time it takes the arm to lift
-    public static final double armTimeDown = 0.08;//0.35;//time it takes the arm to lower
+    public static final double armTimeUp = 0.57;//0.5;//time it takes the arm to lift
+    public static final double armTimeDown = 0.37;//0.35;//time it takes the arm to lower
 }
 //random comment testing github stuff

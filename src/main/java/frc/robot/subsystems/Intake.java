@@ -26,12 +26,16 @@ public class Intake extends SubsystemBase {
     return intakeRoller.getMotorOutputPercent();
   }
 
+  public void AutonIntakeIn(){
+    intakeRoller.set(ControlMode.PercentOutput, -0.72);
+  }
+
   public void IntakeIn(){
     if(intakeRoller.getMotorOutputPercent() != 0){
       intakeRoller.set(ControlMode.PercentOutput, 0);
     }
     else {
-    intakeRoller.set(ControlMode.PercentOutput, -0.82);
+    intakeRoller.set(ControlMode.PercentOutput, -0.72);
     } //sets intake in speed
   }
 

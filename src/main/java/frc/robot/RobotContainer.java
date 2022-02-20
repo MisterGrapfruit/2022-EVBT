@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.Climb;
-import frc.robot.commands.TestAuton;
+import frc.robot.commands.TwoBallAuton;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -30,11 +30,12 @@ public class RobotContainer {
   public static final Arm arm = Arm.getInstance(); //creates arm
 
   public static final Joystick joystick = new Joystick(0); //creates joystick
-  public final JoystickButton button1 = new JoystickButton(joystick, 1); //creates joystick buttons
-  public final JoystickButton button2 = new JoystickButton(joystick, 2);
-  public final JoystickButton button3 = new JoystickButton(joystick, 3);
-  public final JoystickButton button9 = new JoystickButton(joystick, 9);
-  public final JoystickButton button10 = new JoystickButton(joystick, 10);
+  public static final Joystick joystick2 = new Joystick(1);
+  public final JoystickButton button1 = new JoystickButton(joystick2, 1); //creates joystick buttons
+  public final JoystickButton button2 = new JoystickButton(joystick2, 2);
+  public final JoystickButton button3 = new JoystickButton(joystick2, 3);
+  public final JoystickButton button9 = new JoystickButton(joystick2, 9);
+  public final JoystickButton button10 = new JoystickButton(joystick2, 10);
   public final JoystickButton button11 = new JoystickButton(joystick, 11);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -68,6 +69,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new TestAuton();//m_autoCommand;
+    return new TwoBallAuton();//m_autoCommand;
   }
 }

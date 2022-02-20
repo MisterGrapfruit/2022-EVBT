@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
-
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {}
@@ -57,7 +56,9 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    RobotContainer.arm.ArmUp();
+    RobotContainer.arm.setArmMode(true);
+    RobotContainer.arm.ArmDown();
+    RobotContainer.drivetrain.setBrakeMode(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -71,13 +72,15 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     SmartDashboard.putNumber("Intake Speed", RobotContainer.intake.getSpeed());
     SmartDashboard.putNumber("Climb Speed", ((RobotContainer.joystick.getRawAxis(3)+1)/2));
+    //RobotContainer.drivetrain.getIdleMode();
   }
 
   @Override
   public void teleopInit() {
     RobotContainer.drivetrain.leftEncoder.setPosition(0);
     RobotContainer.drivetrain.rightEncoder.setPosition(0);
-    RobotContainer.arm.ArmDown();
+    RobotContainer.arm.setArmMode(false);
+    RobotContainer.drivetrain.setBrakeMode(true);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -92,6 +95,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     SmartDashboard.putNumber("Intake Speed", RobotContainer.intake.getSpeed());
     SmartDashboard.putNumber("Climb Speed", ((RobotContainer.joystick.getRawAxis(3)+1)/2));
+    //RobotContainer.drivetrain.getIdleMode();
   }
 
   @Override

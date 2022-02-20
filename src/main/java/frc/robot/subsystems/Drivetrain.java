@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +36,48 @@ public class Drivetrain extends SubsystemBase {
     rightBack.follow(rightFront);
   }
 
+  public void setBrakeMode(boolean set){
+    if(set){
+      leftFront.setIdleMode(IdleMode.kBrake);
+      leftBack.setIdleMode(IdleMode.kCoast);
+      rightFront.setIdleMode(IdleMode.kBrake);
+      rightBack.setIdleMode(IdleMode.kCoast);
+    }
+    else{
+      leftFront.setIdleMode(IdleMode.kCoast);
+      leftBack.setIdleMode(IdleMode.kCoast);
+      rightFront.setIdleMode(IdleMode.kCoast);
+      rightBack.setIdleMode(IdleMode.kCoast);
+    }
+  }
+/*
+  public void getIdleMode(){
+      if(leftFront.getIdleMode() == IdleMode.kBrake){
+        SmartDashboard.putString("Left Front", "Brake");
+      }
+      else{
+        SmartDashboard.putString("Left Front", "Coast");
+      }
+      if(leftBack.getIdleMode() == IdleMode.kBrake){
+        SmartDashboard.putString("Left Back", "Brake");
+      }
+      else{
+        SmartDashboard.putString("Left Back", "Coast");
+      }
+      if(rightFront.getIdleMode() == IdleMode.kBrake){
+        SmartDashboard.putString("Right Front", "Brake");
+      }
+      else{
+        SmartDashboard.putString("Right Front", "Coast");
+      }
+      if(rightBack.getIdleMode() == IdleMode.kBrake){
+        SmartDashboard.putString("Right Back", "Brake");
+      }
+      else{
+        SmartDashboard.putString("Right Back", "Coast");
+      }
+  }
+*/
   public void setSpeed(double leftSpeed, double rightSpeed){
     leftFront.set(leftSpeed); //sets the left front motor speed
     rightFront.set(rightSpeed); //sets the right front motor speed

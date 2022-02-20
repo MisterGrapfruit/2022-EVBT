@@ -20,7 +20,7 @@ public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   CANSparkMax armMotor = new CANSparkMax(21, MotorType.kBrushless);
 
-  boolean armIsUp = true;
+  boolean armIsUp;
   double lastBurstTime = -1.0;
 
   private static final Arm arm = new Arm();
@@ -35,6 +35,10 @@ public class Arm extends SubsystemBase {
     //pid.setOutputRange(-0.2, 0.2);
     armMotor.setIdleMode(IdleMode.kBrake);
 
+  }
+
+  public void setArmMode(boolean armIsUp){
+    this.armIsUp = armIsUp;
   }
 
   public void ArmUp(){
@@ -54,7 +58,7 @@ public class Arm extends SubsystemBase {
   public void ArmHold(){
     if (armIsUp) {
       if (Timer.getFPGATimestamp() - lastBurstTime < Constants.armTimeUp) {
-        armMotor.set(Constants.armTravel);
+        armMotor.set(Constants.armTravelUp);
       }
       else{
         armMotor.set(Constants.armHoldUp);
@@ -62,7 +66,7 @@ public class Arm extends SubsystemBase {
     } 
     else if (!armIsUp) {
       if (Timer.getFPGATimestamp() - lastBurstTime < Constants.armTimeDown) {
-        armMotor.set(-Constants.armTravel);
+        armMotor.set(Constants.armTravelDown);
       }
       else{
         armMotor.set(-Constants.armHoldDown);
