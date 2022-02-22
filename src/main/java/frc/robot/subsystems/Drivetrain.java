@@ -30,10 +30,26 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Drivetrain() {
+    formatMotors();
+  }
+
+  private void formatMotors(){
+    leftFront.restoreFactoryDefaults();
+    leftBack.restoreFactoryDefaults();
+    rightFront.restoreFactoryDefaults();
+    rightBack.restoreFactoryDefaults();
+    leftFront.setSmartCurrentLimit(80);
+    leftBack.setSmartCurrentLimit(80);
+    rightFront.setSmartCurrentLimit(80);
+    rightBack.setSmartCurrentLimit(80);
     leftFront.setInverted(false); //inverts motors to right direction (front and back)
     rightFront.setInverted(true);
     leftBack.follow(leftFront); //back motor follows the front
     rightBack.follow(rightFront);
+    leftFront.burnFlash();
+    rightFront.burnFlash();
+    leftBack.burnFlash();
+    rightBack.burnFlash();
   }
 
   public void setBrakeMode(boolean set){
@@ -81,6 +97,9 @@ public class Drivetrain extends SubsystemBase {
   public void setSpeed(double leftSpeed, double rightSpeed){
     leftFront.set(leftSpeed); //sets the left front motor speed
     rightFront.set(rightSpeed); //sets the right front motor speed
+
+    SmartDashboard.putNumber("Left Motors", leftFront.get());
+    SmartDashboard.putNumber("Right Motors", rightFront.get());
   }
 
   public void arcadeDrive(double throttle, double twist){
@@ -149,7 +168,14 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Motors", right);
   }
 
+  public void autonArcadeDrive(double throttle, double twist){
+    setSpeed(throttle + twist, throttle - twist); //sets speed of left and right motor
 
+    SmartDashboard.putNumber("Throttle", throttle);
+    SmartDashboard.putNumber("Twist", twist);
+    SmartDashboard.putNumber("Left Motors", throttle + twist);
+    SmartDashboard.putNumber("Right Motors", throttle - twist);
+  }
 
   @Override
   public void periodic() {

@@ -56,19 +56,19 @@ public class TwoBallAuton extends CommandBase {
     if(Timer.getFPGATimestamp() - initTime > 4.3){
       RobotContainer.drivetrain.arcadeDrive(0, 0);
     }
-    if(Timer.getFPGATimestamp() - initTime > 5 && Timer.getFPGATimestamp() - initTime < 8.15){
-      RobotContainer.drivetrain.arcadeDrive(0, 0.55);
+    if(Timer.getFPGATimestamp() - initTime > 5 && Timer.getFPGATimestamp() - initTime < 8.2){
+      RobotContainer.drivetrain.arcadeDrive(0, 0.6);
     }
-    if(Timer.getFPGATimestamp() - initTime > 8.15){
+    if(Timer.getFPGATimestamp() - initTime > 8.2){
       RobotContainer.drivetrain.arcadeDrive(0, 0);
     }
-    if(Timer.getFPGATimestamp() - initTime > 8.15 && Timer.getFPGATimestamp() - initTime < 9.15){
+    if(Timer.getFPGATimestamp() - initTime > 8.2 && Timer.getFPGATimestamp() - initTime < 9.2){
       RobotContainer.drivetrain.arcadeDrive(0.5, 0);
     }
-    if(Timer.getFPGATimestamp() - initTime > 9.15 && Timer.getFPGATimestamp() - initTime < 10.15){
+    if(Timer.getFPGATimestamp() - initTime > 9.2 && Timer.getFPGATimestamp() - initTime < 10.2){
       RobotContainer.intake.AutonIntakeOut();
     }
-    if(Timer.getFPGATimestamp() - initTime > 10.15){
+    if(Timer.getFPGATimestamp() - initTime > 10.2){
       RobotContainer.intake.IntakeStop();
     }
     if(Timer.getFPGATimestamp() - initTime > 13 && Timer.getFPGATimestamp() - initTime < 14.5){

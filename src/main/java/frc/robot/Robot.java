@@ -56,8 +56,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    RobotContainer.arm.setArmMode(true);
-    RobotContainer.arm.ArmDown();
+    RobotContainer.arm.setArmMode(false);
+    RobotContainer.arm.ArmUp();
     RobotContainer.drivetrain.setBrakeMode(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.Climb;
-import frc.robot.commands.TwoBallAuton;
+import frc.robot.commands.ThreeBallAuton;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -69,6 +69,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new TwoBallAuton();//m_autoCommand;
+    return new ThreeBallAuton();//m_autoCommand;
   }
 }
