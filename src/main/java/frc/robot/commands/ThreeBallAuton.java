@@ -82,7 +82,7 @@ public class ThreeBallAuton extends CommandBase {
     if(Timer.getFPGATimestamp() - initTime > 8.3 && Timer.getFPGATimestamp() - initTime < 8.8){
       RobotContainer.intake.AutonIntakeOut();
     }
-    if(Timer.getFPGATimestamp() - initTime > 8.8 && Timer.getFPGATimestamp() < 9.0){
+    if(Timer.getFPGATimestamp() - initTime > 8.8 && Timer.getFPGATimestamp() - initTime < 9.0){
       RobotContainer.intake.IntakeStop();
     }
   }
